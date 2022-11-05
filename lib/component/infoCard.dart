@@ -24,10 +24,11 @@ class InfoCard extends StatefulWidget {
 class _InfoCardState extends State<InfoCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return Expanded(
+        child: Container(
       constraints: BoxConstraints(
           minWidth: Responsive.isDesktop(context)
-              ? 200
+              ? 350
               : SizeConfig.screenWidth / 2 - 40),
       padding: EdgeInsets.only(
           top: 20,
@@ -41,60 +42,68 @@ class _InfoCardState extends State<InfoCard> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Card(
-            borderOnForeground: true,
-            color: InfoCard.pIconColor,
-            child: SvgPicture.asset(widget.icon, width: 35),
-          ),
-          SizedBox(
-            height: SizeConfig.blockSizeVertical * 2,
-          ),
-          InkWell(
-            child: PrimaryText(
-                text: widget.label, color: AppColors.secondary, size: 16),
-            onTap: () {
-              setState(() {
-                InfoCard.selected = widget.label;
-                print(InfoCard.selected);
-              });
-            },
-          ),
-          SizedBox(
-            height: SizeConfig.blockSizeVertical * 2,
-          ),
-          SizedBox(
-            height: 50,
-            width: 70,
-            child: Row(
-              children: [
-                Countup(
-                  begin: 0,
-                  end: widget.amount,
-                  duration: Duration(seconds: 8),
-                  separator: ',',
-                  style: TextStyle(
-                      fontSize: 18,
-                      fontFamily: "Poppins",
-                      fontWeight: FontWeight.w700,
-                      color: InfoCard.percentcolor),
-                ),
-                Text(
-                  " %",
-                  style: TextStyle(
-                      fontFamily: "Poppins",
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: InfoCard.percentcolor),
-                ),
-              ],
+          Center(
+            child: Card(
+              borderOnForeground: true,
+              color: InfoCard.pIconColor,
+              child: SvgPicture.asset(widget.icon, width: 35),
             ),
           ),
           SizedBox(
             height: SizeConfig.blockSizeVertical * 2,
           ),
-          Image.asset(widget.colorCode, width: 35),
+          Center(
+            child: InkWell(
+              child: PrimaryText(
+                  text: widget.label, color: AppColors.secondary, size: 16),
+              onTap: () {
+                setState(() {
+                  InfoCard.selected = widget.label;
+                  print(InfoCard.selected);
+                });
+              },
+            ),
+          ),
+          SizedBox(
+            height: SizeConfig.blockSizeVertical * 2,
+          ),
+          Center(
+            child: SizedBox(
+              height: 50,
+              width: 90,
+              child: Row(
+                children: [
+                  Countup(
+                    begin: 0,
+                    end: widget.amount,
+                    duration: Duration(seconds: 8),
+                    separator: ',',
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontFamily: "Poppins",
+                        fontWeight: FontWeight.w700,
+                        color: InfoCard.percentcolor),
+                  ),
+                  Text(
+                    " %  ",
+                    style: TextStyle(
+                        fontFamily: "Poppins",
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: InfoCard.percentcolor),
+                  ),
+                  SizedBox(
+                    height: SizeConfig.blockSizeVertical * 2,
+                  ),
+                  Expanded(
+                    child: Image.asset(widget.colorCode, width: 35),
+                  ),
+                ],
+              ),
+            ),
+          ),
         ],
       ),
-    );
+    ));
   }
 }

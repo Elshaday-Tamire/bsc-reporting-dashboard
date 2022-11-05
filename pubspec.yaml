@@ -36,6 +36,10 @@ dependencies:
   animated_text_kit:
   provider:
   contactus: ^1.2.0
+  easy_sidemenu:
+  pie_chart:
+  screenshot:
+  image_downloader_web: ^1.0.2
   
   
   

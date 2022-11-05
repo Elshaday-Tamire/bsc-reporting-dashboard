@@ -2,8 +2,9 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:responsive_dashboard/component/Navigation.dart';
+import 'package:responsive_dashboard/ui/pages/login_page.dart';
 import 'package:responsive_dashboard/ui/pages/login_page_left_side.dart';
-import 'dashboard.dart';
 
 class ApiLoading extends StatefulWidget {
   const ApiLoading({Key key}) : super(key: key);
@@ -24,24 +25,37 @@ class _ApiLoadingState extends State<ApiLoading> {
 
   onClose() async {
     //var url = Uri.parse('https://bsc-newapi.herokuapp.com/bsc/kpi/');
-    //https://pms-apis.herokuapp.com
-    var response = await http.post(
-        Uri.https('pms-apis.herokuapp.com', 'core/auth/login/'),
-        body: {"username": "admin", "password": "admin"});
+    //https://pms-apis.herokuapp.
+    var response = await http
+        .post(Uri.https('pms-apis.herokuapp.com', 'core/auth/login/'), body: {
+      "username": LoginPageLeftSide.username.toString(),
+      "password": LoginPageLeftSide.password.toString()
+    });
 
-    final result = jsonDecode(response.body) as List;
-    ApiLoading.data = result;
+    if (response.statusCode == 200) {
+      final result = jsonDecode(response.body) as List;
+      ApiLoading.data = result;
+      for (int i = 0; i < result.length; i++) {
+        ApiLoading.kpis.add(result[i]['kpi_name']);
+      }
+      print(ApiLoading.data);
+      print((response.body).runtimeType);
 
-    for (int i = 0; i < result.length; i++) {
-      ApiLoading.kpis.add(result[i]['kpi_name']);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => Navigation()),
+      );
+    } else {
+      setState(() {
+        LoginPageLeftSide.errorColor = Colors.orange;
+        LoginPageLeftSide.error = "Incorrect credentials";
+        LoginPageLeftSide().clearText();
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => LoginPage()),
+        );
+      });
     }
-    print(ApiLoading.data);
-    print((response.body).runtimeType);
-
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Dashboard()),
-    );
   }
 
   @override

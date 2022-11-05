@@ -5,9 +5,11 @@ TextEditingController usernameController = new TextEditingController();
 TextEditingController passwordController = new TextEditingController();
 
 class LoginPageLeftSide extends StatefulWidget {
-  const LoginPageLeftSide({Key key}) : super(key: key);
+  LoginPageLeftSide({Key key}) : super(key: key);
   static String username = "";
   static String password = "";
+  static String error = "";
+  static Color errorColor = Colors.white;
   void clearText() {
     LoginPageLeftSide.username = "";
     LoginPageLeftSide.password = "";
@@ -46,22 +48,23 @@ class _LoginPageLeftSideState extends State<LoginPageLeftSide> {
             const SizedBox(height: 24),
             TextField(
               controller: usernameController,
-              decoration: InputDecoration(
-                  label: Text("email"),
-                  hintText: "Please write your email address"),
+              decoration:
+                  InputDecoration(label: Text("username"), hintText: ""),
             ),
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
-                  label: Text("password"),
-                  hintText: "Please write your password"),
+              decoration:
+                  InputDecoration(label: Text("password"), hintText: ""),
             ),
             const SizedBox(height: 24),
             Align(
-              alignment: Alignment.topRight,
+              alignment: Alignment.center,
               child: MaterialButton(
-                child: const Text("Forgot password?"),
+                child: Text(
+                  LoginPageLeftSide.error,
+                  style: TextStyle(color: LoginPageLeftSide.errorColor),
+                ),
                 onPressed: () {},
               ),
             ),
@@ -74,10 +77,17 @@ class _LoginPageLeftSideState extends State<LoginPageLeftSide> {
                   LoginPageLeftSide.password =
                       passwordController.text.toString();
                 });
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => ApiLoading()),
-                );
+                if (usernameController.text == "" ||
+                    passwordController.text == "") {
+                  setState(() {
+                    LoginPageLeftSide.error = "All fields are required";
+                  });
+                } else {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => ApiLoading()),
+                  );
+                }
               },
               child: Text("Login"),
               minWidth: double.infinity,

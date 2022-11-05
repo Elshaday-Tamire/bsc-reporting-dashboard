@@ -25,7 +25,7 @@ class LoginPage extends StatelessWidget {
             ),
             child: Row(
               children: [
-                const LoginPageLeftSide(),
+                LoginPageLeftSide(),
                 if (MediaQuery.of(context).size.width > 900)
                   const LoginPageRightSide(),
               ],
