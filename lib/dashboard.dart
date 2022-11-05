@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:responsive_dashboard/component/appBarActionItems.dart';
 import 'package:responsive_dashboard/component/barCHart4.dart';
 import 'package:responsive_dashboard/component/barChart.dart';
@@ -16,12 +17,15 @@ import 'package:responsive_dashboard/config/responsive.dart';
 import 'package:responsive_dashboard/config/size_config.dart';
 import 'package:responsive_dashboard/style/colors.dart';
 import 'package:responsive_dashboard/style/style.dart';
+import 'package:screenshot/screenshot.dart';
+import 'package:image_downloader_web/image_downloader_web.dart';
 
 import 'loading.dart';
 
 class Dashboard extends StatefulWidget {
   @override
   State<Dashboard> createState() => _DashboardState();
+
   static double financialWaight = 0;
   static double customerlWaight = 0;
   static double internalWaight = 0;
@@ -98,6 +102,57 @@ class _DashboardState extends State<Dashboard> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    Dashboard.financialjanscore = 0;
+    Dashboard.financialfebscore = 0;
+    Dashboard.financialmarchscore = 0;
+    Dashboard.financialaprilscore = 0;
+    Dashboard.financialmayscore = 0;
+    Dashboard.financialjunescore = 0;
+    Dashboard.financialjulyscore = 0;
+    Dashboard.financialaugestscore = 0;
+    Dashboard.financialseptscore = 0;
+    Dashboard.financialoctscore = 0;
+    Dashboard.financialnovscore = 0;
+    Dashboard.financialdesscore = 0;
+
+    Dashboard.customerjanscore = 0;
+    Dashboard.customerfebscore = 0;
+    Dashboard.customermarchscore = 0;
+    Dashboard.customeraprilscore = 0;
+    Dashboard.customermayscore = 0;
+    Dashboard.customerjunescore = 0;
+    Dashboard.customerjulyscore = 0;
+    Dashboard.customeraugestscore = 0;
+    Dashboard.customerseptscore = 0;
+    Dashboard.customeroctscore = 0;
+    Dashboard.customernovscore = 0;
+    Dashboard.customerdesscore = 0;
+
+    Dashboard.internaljanscore = 0;
+    Dashboard.internalfebscore = 0;
+    Dashboard.internalmarchscore = 0;
+    Dashboard.internalaprilscore = 0;
+    Dashboard.internalmayscore = 0;
+    Dashboard.internaljunescore = 0;
+    Dashboard.internaljulyscore = 0;
+    Dashboard.internalaugestscore = 0;
+    Dashboard.internalseptscore = 0;
+    Dashboard.internaloctscore = 0;
+    Dashboard.internalnovscore = 0;
+    Dashboard.internaldesscore = 0;
+
+    Dashboard.learningjanscore = 0;
+    Dashboard.learningfebscore = 0;
+    Dashboard.learningmarchscore = 0;
+    Dashboard.learningaprilscore = 0;
+    Dashboard.learningmayscore = 0;
+    Dashboard.learningjunescore = 0;
+    Dashboard.learningjulyscore = 0;
+    Dashboard.learningaugestscore = 0;
+    Dashboard.learningseptscore = 0;
+    Dashboard.learningoctscore = 0;
+    Dashboard.learningnovscore = 0;
+    Dashboard.learningdesscore = 0;
     for (int i = 0; i < ApiLoading.data.length; i++) {
       if (ApiLoading.data[i]["perspective"] == "Financial") {
         Dashboard.financialWaight =
@@ -362,490 +417,528 @@ class _DashboardState extends State<Dashboard> {
         colorcodepathLearningandGrowth = "assets/cyan.png";
       });
     }
+    final _screenshotController = ScreenshotController();
+    final _screenshotController2 = ScreenshotController();
+    final _screenshotController3 = ScreenshotController();
+    final _screenshotController4 = ScreenshotController();
+    final _screenshotController5 = ScreenshotController();
+    final WebImageDownloader _webImageDownloader = WebImageDownloader();
+    bool downloading = false;
+    Future<void> _takeScreenshot() async {
+      final imageFile = await _screenshotController.capture();
+      setState(() {
+        downloading = true;
+      });
+      //const _url = "https://picsum.photos/200";
+      await _webImageDownloader.downloadImageFromUInt8List(
+          uInt8List: imageFile);
+      setState(() {
+        downloading = false;
+      });
+    }
+
+    Future<void> _takeScreenshot2() async {
+      final imageFile = await _screenshotController2.capture();
+      setState(() {
+        downloading = true;
+      });
+      //const _url = "https://picsum.photos/200";
+      await _webImageDownloader.downloadImageFromUInt8List(
+          uInt8List: imageFile);
+      setState(() {
+        downloading = false;
+      });
+    }
+
+    Future<void> _takeScreenshot3() async {
+      final imageFile = await _screenshotController3.capture();
+      setState(() {
+        downloading = true;
+      });
+      //const _url = "https://picsum.photos/200";
+      await _webImageDownloader.downloadImageFromUInt8List(
+          uInt8List: imageFile);
+      setState(() {
+        downloading = false;
+      });
+    }
+
+    Future<void> _takeScreenshot4() async {
+      final imageFile = await _screenshotController4.capture();
+      setState(() {
+        downloading = true;
+      });
+      //const _url = "https://picsum.photos/200";
+      await _webImageDownloader.downloadImageFromUInt8List(
+          uInt8List: imageFile);
+      setState(() {
+        downloading = false;
+      });
+    }
+
+    Future<void> _takeScreenshot5() async {
+      final imageFile = await _screenshotController5.capture();
+      setState(() {
+        downloading = true;
+      });
+      //const _url = "https://picsum.photos/200";
+      await _webImageDownloader.downloadImageFromUInt8List(
+          uInt8List: imageFile);
+      setState(() {
+        downloading = false;
+      });
+    }
 
     // print(PaymentDetailList.UniquePerpective[1]);
     return Scaffold(
-        key: _drawerKey,
-        drawer: SizedBox(width: 100, child: SideMenu()),
-        appBar: !Responsive.isDesktop(context)
-            ? AppBar(
-                elevation: 0,
-                backgroundColor: AppColors.white,
-                leading: IconButton(
-                    onPressed: () {
-                      _drawerKey.currentState.openDrawer();
-                    },
-                    icon: Icon(Icons.menu, color: AppColors.black)),
-                actions: [
-                  AppBarActionItems(),
-                ],
-              )
-            : PreferredSize(
-                preferredSize: Size.zero,
-                child: SizedBox(),
-              ),
-        body: SafeArea(
+      key: _drawerKey,
+      drawer: SizedBox(width: 100, child: SideMenu()),
+      appBar: !Responsive.isDesktop(context)
+          ? AppBar(
+              elevation: 0,
+              backgroundColor: AppColors.white,
+              leading: IconButton(
+                  onPressed: () {
+                    _drawerKey.currentState.openDrawer();
+                  },
+                  icon: Icon(Icons.menu, color: AppColors.black)),
+              actions: [
+                AppBarActionItems(),
+              ],
+            )
+          : PreferredSize(
+              preferredSize: Size.zero,
+              child: SizedBox(),
+            ),
+      body: SafeArea(
           child: Container(
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(Dashboard.commited),
-                    fit: BoxFit.fitWidth,
-                    opacity: 0.2)),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                if (Responsive.isDesktop(context))
-                  Expanded(
-                    flex: 1,
-                    child: SideMenu(),
-                  ),
-                Expanded(
-                    flex: 10,
-                    child: SafeArea(
-                      child: SingleChildScrollView(
-                        padding:
-                            EdgeInsets.symmetric(vertical: 30, horizontal: 30),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Header(),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 4,
-                            ),
-                            SizedBox(
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage(Dashboard.commited),
+                fit: BoxFit.fitWidth,
+                opacity: 0.2)),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            if (Responsive.isDesktop(context))
+              Expanded(
+                  flex: 10,
+                  child: SafeArea(
+                    child: SingleChildScrollView(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Header(),
+                          SizedBox(
+                            height: SizeConfig.blockSizeVertical * 4,
+                          ),
+                          Center(
+                            child: IconButton(
+                                icon: Image.asset(
+                                  'assets/screenshot.png',
+                                  width: 40,
+                                ),
+                                onPressed: () {
+                                  _takeScreenshot();
+                                }),
+                          ),
+                          SizedBox(
                               width: SizeConfig.screenWidth,
-                              child: Wrap(
-                                spacing: 20,
-                                runSpacing: 20,
-                                alignment: WrapAlignment.spaceBetween,
+                              child: Screenshot(
+                                child: Wrap(
+                                  spacing: 10,
+                                  runSpacing: 10,
+                                  alignment: WrapAlignment.spaceBetween,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        InfoCard(
+                                          icon: 'assets/customer.svg',
+                                          label: "Customer",
+                                          amount: Dashboard.customertotalscore *
+                                              100 /
+                                              Dashboard.customerlWaight,
+                                          colorCode: colorcodepathCustomer,
+                                        ),
+                                        SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                        ),
+                                        InfoCard(
+                                          icon: 'assets/financila.svg',
+                                          label: "Financial",
+                                          amount:
+                                              Dashboard.financialtotalscore *
+                                                  100 /
+                                                  Dashboard.financialWaight,
+                                          colorCode: colorcodepathfinancial,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        InfoCard(
+                                          icon: 'assets/internal.svg',
+                                          label: "Internal Business Process",
+                                          amount: Dashboard.internaltotalscore *
+                                              100 /
+                                              Dashboard.internalWaight,
+                                          colorCode:
+                                              colorcodepathInternalBusinessProcess,
+                                        ),
+                                        SizedBox(
+                                          height: 50,
+                                          width: 50,
+                                        ),
+                                        InfoCard(
+                                          icon: 'assets/learning.svg',
+                                          label: "Learning and Growth",
+                                          amount: Dashboard.learningtotalscore *
+                                              100 /
+                                              Dashboard.learningWaight,
+                                          colorCode:
+                                              colorcodepathLearningandGrowth,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                controller: _screenshotController,
+                              )),
+                          SizedBox(
+                            height: SizeConfig.blockSizeVertical * 4,
+                          ),
+                          Center(
+                            child: IconButton(
+                                icon: Image.asset(
+                                  'assets/screenshot.png',
+                                  width: 40,
+                                ),
+                                onPressed: () {
+                                  _takeScreenshot2();
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Screenshot(
+                              child: Column(
                                 children: [
-                                  InfoCard(
-                                    icon: 'assets/customer.svg',
-                                    label: "Customer",
-                                    amount: Dashboard.customertotalscore *
-                                        100 /
-                                        Dashboard.customerlWaight,
-                                    colorCode: colorcodepathCustomer,
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PrimaryText(
+                                              text: '\Customer',
+                                              size: 30,
+                                              fontWeight: FontWeight.w800),
+                                          PrimaryText(
+                                            text: 'Monthly Status',
+                                            size: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.secondary,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
-
-                                  InfoCard(
-                                    icon: 'assets/financila.svg',
-                                    label: "Financial",
-                                    amount: Dashboard.financialtotalscore *
-                                        100 /
-                                        Dashboard.financialWaight,
-                                    colorCode: colorcodepathfinancial,
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
                                   ),
-                                  InfoCard(
-                                    icon: 'assets/internal.svg',
-                                    label: "Internal Business Process",
-                                    amount: Dashboard.internaltotalscore *
-                                        100 /
-                                        Dashboard.internalWaight,
-                                    colorCode:
-                                        colorcodepathInternalBusinessProcess,
+                                  Container(
+                                    height: 180,
+                                    child: BarChartCopmponent(),
                                   ),
-                                  //  num.parse(
-                                  //               InternalBusinessProcessSumPercent
-                                  //                   .toStringAsFixed(2))
-                                  //           .toString() +
-                                  //       " %",
-                                  InfoCard(
-                                    icon: 'assets/learning.svg',
-                                    label: "Learning and Growth",
-                                    amount: Dashboard.learningtotalscore *
-                                        100 /
-                                        Dashboard.learningWaight,
-                                    colorCode: colorcodepathLearningandGrowth,
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 5,
                                   ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        text: 'quarterly status',
+                                        size: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.secondary,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  HistoryTable(),
+                                  if (!Responsive.isDesktop(context))
+                                    PaymentDetailList(),
                                 ],
                               ),
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 4,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrimaryText(
-                                        text: '\Customer',
-                                        size: 30,
-                                        fontWeight: FontWeight.w800),
-                                    PrimaryText(
-                                      text: 'Monthly Status',
-                                      size: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.secondary,
-                                    ),
-                                  ],
-                                ),
-                                // PrimaryText(
-                                //   text: 'CEO',
-                                //   size: 16,
-                                //   fontWeight: FontWeight.w400,
-                                //   color: AppColors.secondary,
-                                // ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            Container(
-                              height: 180,
-                              child: BarChartCopmponent(),
-                            ),
-                            // Container(
-                            //     height: 180,
-                            //     child:
-                            //         LayoutBuilder(builder: (context, constraints) {
-                            //       if (InfoCard.selected == "Financial") {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //       else if(InfoCard.selected=="Customer")
-                            //       {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //     })),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 5,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrimaryText(
-                                  text: 'quarterly status',
-                                  size: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.secondary,
-                                ),
-                                // PrimaryText(
-                                //     text: 'Finincial',
-                                //     size: 30,
-                                //     fontWeight: FontWeight.w800),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            HistoryTable(),
-                            if (!Responsive.isDesktop(context))
-                              PaymentDetailList(),
+                              controller: _screenshotController2),
 
-                            //customer
-                            // SizedBox(
-                            //   height: SizeConfig.blockSizeVertical * 4,
-                            // ),
-                            // SizedBox(
-                            //   width: SizeConfig.screenWidth,
-                            //   child: Wrap(
-                            //     spacing: 20,
-                            //     runSpacing: 20,
-                            //     alignment: WrapAlignment.spaceBetween,
-                            //     children: [
-                            //       InfoCard(
-                            //           icon: 'assets/financila.svg',
-                            //           label: 'Financial',
-                            //           amount: '\20/30 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/customer.svg',
-                            //           label: 'Customer',
-                            //           amount: '\15/20 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/internal.svg',
-                            //           label: 'Internal Business Process',
-                            //           amount: '\18/25 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/learning.svg',
-                            //           label: 'Learning and Growth',
-                            //           amount: '\21/25 %'),
-                            //     ],
-                            //   ),
-                            // ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 4,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrimaryText(
-                                        text: '\Financial',
-                                        size: 30,
-                                        fontWeight: FontWeight.w800),
-                                    PrimaryText(
-                                      text: 'Monthly Status',
-                                      size: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.secondary,
-                                    ),
-                                  ],
-                                ),
-                                // PrimaryText(
-                                //   text: 'CEO',
-                                //   size: 16,
-                                //   fontWeight: FontWeight.w400,
-                                //   color: AppColors.secondary,
-                                // ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            Container(
-                              height: 180,
-                              child: BarChartCopmponent2(),
-                            ),
-                            // Container(
-                            //     height: 180,
-                            //     child:
-                            //         LayoutBuilder(builder: (context, constraints) {
-                            //       if (InfoCard.selected == "Financial") {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //       else if(InfoCard.selected=="Customer")
-                            //       {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //     })),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 5,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrimaryText(
-                                  text: 'quarterly status',
-                                  size: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.secondary,
-                                ),
-                                // PrimaryText(
-                                //     text: 'Finincial',
-                                //     size: 30,
-                                //     fontWeight: FontWeight.w800),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            HistoryTable2(),
-                            if (!Responsive.isDesktop(context))
-                              PaymentDetailList(),
-
-                            //internal business process
-
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 4,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrimaryText(
-                                        text: '\Internal Business Process',
-                                        size: 30,
-                                        fontWeight: FontWeight.w800),
-                                    PrimaryText(
-                                      text: 'Monthly Status',
-                                      size: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.secondary,
-                                    ),
-                                  ],
-                                ),
-                                // PrimaryText(
-                                //   text: 'CEO',
-                                //   size: 16,
-                                //   fontWeight: FontWeight.w400,
-                                //   color: AppColors.secondary,
-                                // ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            Container(
-                              height: 180,
-                              child: BarChartCopmponent3(),
-                            ),
-                            // Container(
-                            //     height: 180,
-                            //     child:
-                            //         LayoutBuilder(builder: (context, constraints) {
-                            //       if (InfoCard.selected == "Financial") {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //       else if(InfoCard.selected=="Customer")
-                            //       {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //     })),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 5,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrimaryText(
-                                  text: 'quarterly status',
-                                  size: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.secondary,
-                                ),
-                                // PrimaryText(
-                                //     text: 'Finincial',
-                                //     size: 30,
-                                //     fontWeight: FontWeight.w800),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            HistoryTable3(),
-                            if (!Responsive.isDesktop(context))
-                              PaymentDetailList(),
-                            //learning and growth
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 4,
-                            ),
-                            // SizedBox(
-                            //   width: SizeConfig.screenWidth,
-                            //   child: Wrap(
-                            //     spacing: 20,
-                            //     runSpacing: 20,
-                            //     alignment: WrapAlignment.spaceBetween,
-                            //     children: [
-                            //       InfoCard(
-                            //           icon: 'assets/financila.svg',
-                            //           label: 'Financial',
-                            //           amount: '\20/30 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/customer.svg',
-                            //           label: 'Customer',
-                            //           amount: '\15/20 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/internal.svg',
-                            //           label: 'Internal Business Process',
-                            //           amount: '\18/25 %'),
-                            //       InfoCard(
-                            //           icon: 'assets/learning.svg',
-                            //           label: 'Learning and Growth',
-                            //           amount: '\21/25 %'),
-                            //     ],
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   height: SizeConfig.blockSizeVertical * 4,
-                            // ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    PrimaryText(
-                                        text: '\Learning and Growth',
-                                        size: 30,
-                                        fontWeight: FontWeight.w800),
-                                    PrimaryText(
-                                      text: 'Monthly Status',
-                                      size: 16,
-                                      fontWeight: FontWeight.w400,
-                                      color: AppColors.secondary,
-                                    ),
-                                  ],
-                                ),
-                                // PrimaryText(
-                                //   text: 'CEO',
-                                //   size: 16,
-                                //   fontWeight: FontWeight.w400,
-                                //   color: AppColors.secondary,
-                                // ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            Container(
-                              height: 180,
-                              child: BarChartCopmponent4(),
-                            ),
-                            // Container(
-                            //     height: 180,
-                            //     child:
-                            //         LayoutBuilder(builder: (context, constraints) {
-                            //       if (InfoCard.selected == "Financial") {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //       else if(InfoCard.selected=="Customer")
-                            //       {
-                            //         return BarChartCopmponent2();
-                            //       }
-                            //     })),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 5,
-                            ),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                PrimaryText(
-                                  text: 'quarterly status',
-                                  size: 16,
-                                  fontWeight: FontWeight.w400,
-                                  color: AppColors.secondary,
-                                ),
-                                // PrimaryText(
-                                //     text: 'Finincial',
-                                //     size: 30,
-                                //     fontWeight: FontWeight.w800),
-                              ],
-                            ),
-                            SizedBox(
-                              height: SizeConfig.blockSizeVertical * 3,
-                            ),
-                            HistoryTable4(),
-                            if (!Responsive.isDesktop(context))
-                              PaymentDetailList()
-                          ],
-                        ),
-                      ),
-                    )),
-                if (Responsive.isDesktop(context))
-                  Expanded(
-                    flex: 4,
-                    child: SafeArea(
-                      child: Container(
-                        width: double.infinity,
-                        height: SizeConfig.screenHeight,
-                        decoration: BoxDecoration(
-                            color: AppColors.secondaryBg.withOpacity(0.4)),
-                        child: SingleChildScrollView(
-                          padding: EdgeInsets.symmetric(
-                              vertical: 30, horizontal: 30),
-                          child: Column(
-                            children: [
-                              AppBarActionItems(),
-                              PaymentDetailList(),
-                            ],
+                          SizedBox(
+                            height: SizeConfig.blockSizeVertical * 4,
                           ),
-                        ),
+                          Center(
+                            child: IconButton(
+                                icon: Image.asset(
+                                  'assets/screenshot.png',
+                                  width: 40,
+                                ),
+                                onPressed: () {
+                                  _takeScreenshot3();
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Screenshot(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PrimaryText(
+                                              text: '\Financial',
+                                              size: 30,
+                                              fontWeight: FontWeight.w800),
+                                          PrimaryText(
+                                            text: 'Monthly Status',
+                                            size: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.secondary,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  Container(
+                                    height: 180,
+                                    child: BarChartCopmponent2(),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 5,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        text: 'quarterly status',
+                                        size: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.secondary,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  HistoryTable2(),
+                                  if (!Responsive.isDesktop(context))
+                                    PaymentDetailList(),
+                                ],
+                              ),
+                              controller: _screenshotController3),
+
+                          //internal business process
+
+                          SizedBox(
+                            height: SizeConfig.blockSizeVertical * 4,
+                          ),
+                          Center(
+                            child: IconButton(
+                                icon: Image.asset(
+                                  'assets/screenshot.png',
+                                  width: 40,
+                                ),
+                                onPressed: () {
+                                  _takeScreenshot4();
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Screenshot(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PrimaryText(
+                                              text:
+                                                  '\Internal Business Process',
+                                              size: 30,
+                                              fontWeight: FontWeight.w800),
+                                          PrimaryText(
+                                            text: 'Monthly Status',
+                                            size: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.secondary,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  Container(
+                                    height: 180,
+                                    child: BarChartCopmponent3(),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 5,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        text: 'quarterly status',
+                                        size: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.secondary,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  HistoryTable3(),
+                                  if (!Responsive.isDesktop(context))
+                                    PaymentDetailList(),
+                                ],
+                              ),
+                              controller: _screenshotController4),
+
+                          //learning and growth
+                          SizedBox(
+                            height: SizeConfig.blockSizeVertical * 4,
+                          ),
+                          Center(
+                            child: IconButton(
+                                icon: Image.asset(
+                                  'assets/screenshot.png',
+                                  width: 40,
+                                ),
+                                onPressed: () {
+                                  _takeScreenshot4();
+                                }),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Screenshot(
+                              child: Column(
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          PrimaryText(
+                                              text: '\Learning and Growth',
+                                              size: 30,
+                                              fontWeight: FontWeight.w800),
+                                          PrimaryText(
+                                            text: 'Monthly Status',
+                                            size: 16,
+                                            fontWeight: FontWeight.w400,
+                                            color: AppColors.secondary,
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  Container(
+                                    height: 180,
+                                    child: BarChartCopmponent4(),
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 5,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      PrimaryText(
+                                        text: 'quarterly status',
+                                        size: 16,
+                                        fontWeight: FontWeight.w400,
+                                        color: AppColors.secondary,
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: SizeConfig.blockSizeVertical * 3,
+                                  ),
+                                  HistoryTable4(),
+                                  if (!Responsive.isDesktop(context))
+                                    PaymentDetailList()
+                                ],
+                              ),
+                              controller: _screenshotController5),
+                        ],
+                      ),
+                    ),
+                  )),
+            if (Responsive.isDesktop(context))
+              Expanded(
+                flex: 4,
+                child: SafeArea(
+                  child: Container(
+                    width: double.infinity,
+                    height: SizeConfig.screenHeight,
+                    decoration: BoxDecoration(
+                        color: AppColors.secondaryBg.withOpacity(0.4)),
+                    child: SingleChildScrollView(
+                      padding:
+                          EdgeInsets.symmetric(vertical: 30, horizontal: 30),
+                      child: Column(
+                        children: [
+                          AppBarActionItems(),
+                          PaymentDetailList(),
+                        ],
                       ),
                     ),
                   ),
-              ],
-            ),
-          ),
-        ));
+                ),
+              ),
+          ],
+        ),
+      )),
+    );
   }
 }

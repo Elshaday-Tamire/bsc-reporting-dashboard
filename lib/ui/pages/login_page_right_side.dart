@@ -30,14 +30,27 @@ class LoginPageRightSide extends StatelessWidget {
                         alignment: Alignment.topLeft,
                         color: Colors.white.withOpacity(.3),
                         padding: const EdgeInsets.all(42),
-                        child: const Text(
-                          '"THE BEST WAY TO FIGHT POVERTY IS THROUGH COOPERATION 🤝"',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 25.00,
-                              fontWeight: FontWeight.bold,
-                              fontStyle: FontStyle.italic,
-                              fontFamily: "Poppins"),
+                        child: Column(
+                          children: [
+                            const Text(
+                              '"THE BEST WAY TO FIGHT POVERTY IS THROUGH COOPERATION 🤝"\n',
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 25.00,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: "Poppins"),
+                            ),
+                            const Text(
+                              "Obbo Haile Gebre Lube",
+                              style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 13.00,
+                                  fontWeight: FontWeight.bold,
+                                  fontStyle: FontStyle.italic,
+                                  fontFamily: "Poppins"),
+                            )
+                          ],
                         ),
                       ),
                     ),
