@@ -560,6 +560,14 @@ class _DashboardState extends State<Dashboard> {
                                           amount: Dashboard.customertotalscore *
                                               100 /
                                               Dashboard.customerlWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .customertotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .customerlWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode: colorcodepathCustomer,
                                         ),
                                         SizedBox(
@@ -573,6 +581,14 @@ class _DashboardState extends State<Dashboard> {
                                               Dashboard.financialtotalscore *
                                                   100 /
                                                   Dashboard.financialWaight,
+                                          outOfFive: double.parse(
+                                              (((Dashboard.financialtotalscore *
+                                                              100 /
+                                                              Dashboard
+                                                                  .financialWaight) *
+                                                          5) /
+                                                      100)
+                                                  .toStringAsFixed(2)),
                                           colorCode: colorcodepathfinancial,
                                         ),
                                       ],
@@ -585,6 +601,14 @@ class _DashboardState extends State<Dashboard> {
                                           amount: Dashboard.internaltotalscore *
                                               100 /
                                               Dashboard.internalWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .internaltotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .internalWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode:
                                               colorcodepathInternalBusinessProcess,
                                         ),
@@ -598,6 +622,14 @@ class _DashboardState extends State<Dashboard> {
                                           amount: Dashboard.learningtotalscore *
                                               100 /
                                               Dashboard.learningWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .learningtotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .learningWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode:
                                               colorcodepathLearningandGrowth,
                                         ),

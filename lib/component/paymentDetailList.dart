@@ -9,6 +9,8 @@ import 'package:responsive_dashboard/style/style.dart';
 import 'package:countup/countup.dart';
 import 'package:intl/intl.dart';
 
+import 'StarRating.dart';
+
 class PaymentDetailList extends StatefulWidget {
   PaymentDetailList({
     Key key,
@@ -186,6 +188,26 @@ class _PaymentDetailListState extends State<PaymentDetailList> {
                   ),
                 ],
               ),
+              StarRating(
+                  rating: double.parse((funcobjectiveSum(
+                              PaymentDetailList.unsetObjectives[s].toString()) *
+                          5 /
+                          100)
+                      .toStringAsFixed(2)),
+                  size: 15,
+                  color: Colors.blue,
+                  borderColor: Colors.grey),
+              Text(
+                double.parse((funcobjectiveSum(PaymentDetailList
+                                    .unsetObjectives[s]
+                                    .toString()) *
+                                5 /
+                                100)
+                            .toStringAsFixed(2))
+                        .toString() +
+                    "/5",
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
               PrimaryText(
                 text: formattedDate.toString(),
                 size: 14,
@@ -317,6 +339,28 @@ class _PaymentDetailListState extends State<PaymentDetailList> {
                       .toStringAsFixed(2))
                   .toString() +
               " %";
+        }
+      }
+
+      double DisplayAchievementFromFive(String Unit) {
+        if (Unit == "Percentage") {
+          return num.parse((ApiLoading.data[x]["aggregate"] * 100 / multiplier)
+              .toStringAsFixed(2));
+        } else if (Unit == "USD") {
+          return num.parse((ApiLoading.data[x]["actual_aggregate"] *
+                  100 /
+                  ApiLoading.data[x]["kpi_target"])
+              .toStringAsFixed(2));
+        } else if (Unit == "ETB") {
+          return num.parse((ApiLoading.data[x]["actual_aggregate"] *
+                  100 /
+                  ApiLoading.data[x]["kpi_target"])
+              .toStringAsFixed(2));
+        } else {
+          return num.parse((ApiLoading.data[x]["actual_aggregate"] *
+                  100 /
+                  ApiLoading.data[x]["kpi_target"])
+              .toStringAsFixed(2));
         }
       }
 
@@ -518,6 +562,11 @@ class _PaymentDetailListState extends State<PaymentDetailList> {
                 label: ApiLoading.data[x]['kpi_name'],
                 amount: DisplayAchievement(
                     ApiLoading.data[x]['kpi_unit_measurement']),
+                outOfFive: double.parse((((DisplayAchievementFromFive(
+                                ApiLoading.data[x]['kpi_unit_measurement']) *
+                            5) /
+                        100)
+                    .toStringAsFixed(2))),
                 target:
                     DisplayTarget(ApiLoading.data[x]['kpi_unit_measurement']),
                 actual:

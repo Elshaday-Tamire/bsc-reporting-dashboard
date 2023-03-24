@@ -480,6 +480,14 @@ class _LearmimgState extends State<Learmimg> {
                                           amount: Dashboard.learningtotalscore *
                                               100 /
                                               Dashboard.learningWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .learningtotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .learningWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode:
                                               colorcodepathLearningandGrowth,
                                         ),

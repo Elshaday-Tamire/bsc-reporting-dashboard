@@ -481,6 +481,14 @@ class _CustomerState extends State<Customer> {
                                           amount: Dashboard.customertotalscore *
                                               100 /
                                               Dashboard.customerlWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .customertotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .customerlWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode: colorcodepathCustomer,
                                         ),
                                       ],

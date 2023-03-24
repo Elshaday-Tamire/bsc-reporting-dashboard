@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     LoginPageLeftSide.password = "";
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'BSC Reporting',
       theme: ThemeData(
           primarySwatch: Colors.blue,
           scaffoldBackgroundColor: AppColors.primaryBg),

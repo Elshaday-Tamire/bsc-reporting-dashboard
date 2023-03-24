@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:responsive_dashboard/component/StarRating.dart';
 import 'package:responsive_dashboard/style/colors.dart';
 import 'package:responsive_dashboard/style/style.dart';
 
@@ -7,6 +8,7 @@ class PaymentListTile extends StatelessWidget {
   final String icon;
   final String label;
   final String amount;
+  final double outOfFive;
   final String target;
   final String actual;
   String colorCode;
@@ -15,6 +17,7 @@ class PaymentListTile extends StatelessWidget {
       {this.icon,
       this.label,
       this.amount,
+      this.outOfFive,
       this.colorCode,
       this.target,
       this.actual});
@@ -72,7 +75,16 @@ class PaymentListTile extends StatelessWidget {
             size: 16,
             fontWeight: FontWeight.bold,
             color: Color.fromRGBO(0, 174, 239, 1),
-          )
+          ),
+          StarRating(
+              rating: outOfFive,
+              size: 15,
+              color: Colors.blue,
+              borderColor: Colors.grey),
+          Text(
+            outOfFive.toString() + "/5",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ],
       ),
       onTap: () {

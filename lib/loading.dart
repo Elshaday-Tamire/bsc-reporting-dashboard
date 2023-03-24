@@ -26,8 +26,9 @@ class _ApiLoadingState extends State<ApiLoading> {
   onClose() async {
     //var url = Uri.parse('https://bsc-newapi.herokuapp.com/bsc/kpi/');
     //https://pms-apis.herokuapp.
+
     var response = await http
-        .post(Uri.https('pms-apis.herokuapp.com', 'core/auth/login/'), body: {
+        .post(Uri.http('10.1.177.61:5003', 'core/auth/login/'), body: {
       "username": LoginPageLeftSide.username.toString(),
       "password": LoginPageLeftSide.password.toString()
     });

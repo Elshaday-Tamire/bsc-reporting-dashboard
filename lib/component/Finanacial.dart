@@ -481,6 +481,14 @@ class _FinacialState extends State<Finacial> {
                                               Dashboard.financialtotalscore *
                                                   100 /
                                                   Dashboard.financialWaight,
+                                          outOfFive: double.parse(
+                                              (((Dashboard.financialtotalscore *
+                                                              100 /
+                                                              Dashboard
+                                                                  .financialWaight) *
+                                                          5) /
+                                                      100)
+                                                  .toStringAsFixed(2)),
                                           colorCode: colorcodepathfinancial,
                                         ),
                                       ],

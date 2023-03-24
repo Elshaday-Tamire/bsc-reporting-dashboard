@@ -6,16 +6,20 @@ import 'package:responsive_dashboard/config/size_config.dart';
 import 'package:responsive_dashboard/style/colors.dart';
 import 'package:responsive_dashboard/style/style.dart';
 
+import 'StarRating.dart';
+
 class InfoCard extends StatefulWidget {
   static String selected = "Financial";
   final String icon;
   final String label;
   final num amount;
+  final double outOfFive;
   final String colorCode;
   static Color percentcolor = Colors.black;
   static Color pIconColor = Colors.white;
 
-  InfoCard({this.icon, this.label, this.amount, this.colorCode});
+  InfoCard(
+      {this.icon, this.label, this.amount, this.colorCode, this.outOfFive});
 
   @override
   State<InfoCard> createState() => _InfoCardState();
@@ -69,34 +73,52 @@ class _InfoCardState extends State<InfoCard> {
           ),
           Center(
             child: SizedBox(
-              height: 50,
+              height: 120,
               width: 90,
-              child: Row(
+              child: Column(
                 children: [
-                  Countup(
-                    begin: 0,
-                    end: widget.amount,
-                    duration: Duration(seconds: 8),
-                    separator: ',',
-                    style: TextStyle(
-                        fontSize: 18,
-                        fontFamily: "Poppins",
-                        fontWeight: FontWeight.w700,
-                        color: InfoCard.percentcolor),
-                  ),
-                  Text(
-                    " %  ",
-                    style: TextStyle(
-                        fontFamily: "Poppins",
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: InfoCard.percentcolor),
+                  Row(
+                    children: [
+                      Countup(
+                        begin: 0,
+                        end: widget.amount,
+                        duration: Duration(seconds: 8),
+                        separator: ',',
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontFamily: "Poppins",
+                            fontWeight: FontWeight.w700,
+                            color: InfoCard.percentcolor),
+                      ),
+                      Text(
+                        " %  ",
+                        style: TextStyle(
+                            fontFamily: "Poppins",
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: InfoCard.percentcolor),
+                      ),
+                      SizedBox(
+                        height: SizeConfig.blockSizeVertical * 2,
+                      ),
+                      Expanded(
+                        child: Image.asset(widget.colorCode, width: 35),
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: SizeConfig.blockSizeVertical * 2,
                   ),
+                  StarRating(
+                      rating: widget.outOfFive,
+                      size: 15,
+                      color: Colors.blue,
+                      borderColor: Colors.grey),
                   Expanded(
-                    child: Image.asset(widget.colorCode, width: 35),
+                    child: Text(
+                      widget.outOfFive.toString() + "/5",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ],
               ),

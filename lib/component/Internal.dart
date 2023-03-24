@@ -480,6 +480,14 @@ class _InternalState extends State<Internal> {
                                           amount: Dashboard.internaltotalscore *
                                               100 /
                                               Dashboard.internalWaight,
+                                          outOfFive: double.parse((((Dashboard
+                                                              .internaltotalscore *
+                                                          100 /
+                                                          Dashboard
+                                                              .internalWaight) *
+                                                      5) /
+                                                  100)
+                                              .toStringAsFixed(2)),
                                           colorCode:
                                               colorcodepathInternalBusinessProcess,
                                         ),
