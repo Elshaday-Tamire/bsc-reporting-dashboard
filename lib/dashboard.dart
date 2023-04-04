@@ -98,6 +98,7 @@ class _DashboardState extends State<Dashboard> {
   String colorcodepathCustomer = "";
   String colorcodepathInternalBusinessProcess = "";
   String colorcodepathLearningandGrowth = "";
+  String colorcodepathTotalScoreCard = "";
   String dropdownValue = 'One';
   final _formKey = GlobalKey<FormState>();
   @override
@@ -417,6 +418,37 @@ class _DashboardState extends State<Dashboard> {
         colorcodepathLearningandGrowth = "assets/cyan.png";
       });
     }
+
+    double totalScoreCard = ((Dashboard.customertotalscore *
+                100 /
+                Dashboard.customerlWaight) +
+            (Dashboard.financialtotalscore * 100 / Dashboard.financialWaight) +
+            (Dashboard.internaltotalscore * 100 / Dashboard.internalWaight) +
+            (Dashboard.learningtotalscore * 100 / Dashboard.learningWaight)) /
+        4;
+    //Total Score Card Color
+    if (totalScoreCard < 50) {
+      setState(() {
+        colorcodepathTotalScoreCard = "assets/deepred.png";
+      });
+    } else if (totalScoreCard >= 50 && totalScoreCard < 75) {
+      setState(() {
+        colorcodepathTotalScoreCard = "assets/lightred.png";
+      });
+    } else if (totalScoreCard >= 75 && totalScoreCard < 100) {
+      setState(() {
+        colorcodepathTotalScoreCard = "assets/amber.png";
+      });
+    } else if (totalScoreCard >= 100 && totalScoreCard < 120) {
+      setState(() {
+        colorcodepathTotalScoreCard = "assets/green.png";
+      });
+    } else if (totalScoreCard >= 120) {
+      setState(() {
+        colorcodepathTotalScoreCard = "assets/cyan.png";
+      });
+    }
+
     final _screenshotController = ScreenshotController();
     final _screenshotController2 = ScreenshotController();
     final _screenshotController3 = ScreenshotController();
@@ -544,6 +576,7 @@ class _DashboardState extends State<Dashboard> {
                                   _takeScreenshot();
                                 }),
                           ),
+
                           SizedBox(
                               width: SizeConfig.screenWidth,
                               child: Screenshot(
@@ -552,6 +585,19 @@ class _DashboardState extends State<Dashboard> {
                                   runSpacing: 10,
                                   alignment: WrapAlignment.spaceBetween,
                                   children: [
+                                    InfoCard(
+                                      icon: 'assets/total.svg',
+                                      label: "Total Score Card",
+                                      amount: totalScoreCard,
+                                      outOfFive: double.parse(
+                                          ((totalScoreCard * 5) / 100)
+                                              .toStringAsFixed(2)),
+                                      colorCode: colorcodepathTotalScoreCard,
+                                    ),
+                                    SizedBox(
+                                      height: 50,
+                                      width: 50,
+                                    ),
                                     Row(
                                       children: [
                                         InfoCard(
@@ -652,6 +698,7 @@ class _DashboardState extends State<Dashboard> {
                                   _takeScreenshot2();
                                 }),
                           ),
+
                           SizedBox(
                             height: 2,
                           ),
